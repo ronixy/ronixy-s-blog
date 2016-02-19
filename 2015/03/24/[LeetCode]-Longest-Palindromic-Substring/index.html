@@ -1,180 +1,118 @@
-<!doctype html>
-<html class="theme-next use-motion theme-next-mist">
+
+<!DOCTYPE html>
+<html>
 <head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="8wzyN59ggVJs4qdS9_hwgVtKJImj8bVQyDAfY5sfjO0" />
+  
+  <title>[LeetCode] Longest Palindromic Substring | Ronixy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Longest Palindromic SubstringLeetCode第5题，五种解法，算是字符串处理的一个小专题主要参考了以下两篇文章，都是leetcode OJ的article：Longest Palindromic Substring Part ILongest Palindromic Substring Part II">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[LeetCode] Longest Palindromic Substring">
+<meta property="og:url" content="http://ronixy.com/2015/03/24/[LeetCode]-Longest-Palindromic-Substring/index.html">
+<meta property="og:site_name" content="Ronixy">
+<meta property="og:description" content="Longest Palindromic SubstringLeetCode第5题，五种解法，算是字符串处理的一个小专题主要参考了以下两篇文章，都是leetcode OJ的article：Longest Palindromic Substring Part ILongest Palindromic Substring Part II">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/blogpalindrome_table10.png">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/blogpalindrome_table4.png">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/blogpalindrome_table5.png">
+<meta property="og:updated_time" content="2016-02-19T11:03:45.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[LeetCode] Longest Palindromic Substring">
+<meta name="twitter:description" content="Longest Palindromic SubstringLeetCode第5题，五种解法，算是字符串处理的一个小专题主要参考了以下两篇文章，都是leetcode OJ的article：Longest Palindromic Substring Part ILongest Palindromic Substring Part II">
+  
+    <link rel="alternative" href="/atom.xml" title="Ronixy" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-    <meta name="description" content="Ronixy's blog" />
-
-
-
-  <meta name="keywords" content="Algorithms,LeetCode,string problems," />
-
-
-
-
-
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var CONFIG = {
-    scheme: 'Mist',
-    analytics: {
-      baidu: '',
-      google: ''
-    },
-    sidebar: 'post'
-  };
-</script>
-
-
-
-
-  <title> [LeetCode] Longest Palindromic Substring // Ronixy </title>
+  
+  <link href="http://7xi72q.com1.z0.glb.clouddn.com/blogzoo (1).ico" rel="shortcut icon" type="image/x-icon" />
+  
 </head>
-
 <body>
-<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
-  <div class="container one-column page-post-detail">
-    <div class="headband"></div>
-
-    <div id="header" class="header">
-      <div class="header-inner">
-        <h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand">
-      <span class="logo">
-        <i class="icon-logo"></i>
-      </span>
-      <span class="site-title">Ronixy</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
-
-
-  <ul id="menu" class="menu">
-     
-    
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Ronixy</a>
+      </h1>
       
-      <li class="menu-item menu-item-home">
-        <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
-          Home
-        </a>
-      </li>
-    
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">但行好事，莫问前程。</a>
+        </h2>
       
-      <li class="menu-item menu-item-categories">
-        <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
-          Categories
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-archives">
-        <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
-          Archives
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-tags">
-        <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
-          Tags
-        </a>
-      </li>
-    
-  </ul>
-
-
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="ronixy.com">
+        </form>
       </div>
     </div>
-
-    <div id="main" class="main">
-      <div class="main-inner">
-        <div id="content" class="content">
-          
-
-  <div id="posts" class="posts-expand">
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-[LeetCode]-Longest-Palindromic-Substring" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/24/[LeetCode]-Longest-Palindromic-Substring/" class="article-date">
+  <time datetime="2015-03-24T14:55:29.000Z" itemprop="datePublished">2015-03-24</time>
+</a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithms/">Algorithms</a>
+  </div>
 
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              [LeetCode] Longest Palindromic Substring
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on 2015-03-24
-        </span>
-
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
         
-          <span class="post-category">
-            &nbsp; | &nbsp; In
-            
-              <a href="/categories/Algorithms/">Algorithms</a>
+  
+    <h1 class="article-title" itemprop="name">
+      [LeetCode] Longest Palindromic Substring
+    </h1>
+  
 
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/24/[LeetCode]-Longest-Palindromic-Substring/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/24/[LeetCode]-Longest-Palindromic-Substring/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
       
 
       
-        <h4 id="Longest_Palindromic_Substring"><a href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank" rel="external">Longest Palindromic Substring</a></h4><p>LeetCode第5题，五种解法，算是字符串处理的一个小专题<br>主要参考了以下两篇文章，都是leetcode OJ的article：<br><a href="http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-i.html" target="_blank" rel="external">Longest Palindromic Substring Part I</a><br><a href="http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-ii.html" target="_blank" rel="external">Longest Palindromic Substring Part II</a><br><a id="more"></a></p>
-<h3 id="1-_暴力(Brute_force)">1. 暴力(Brute force)</h3><p>首先就是谁都能想到的暴力法了，从头到尾遍历字符串，每次以一个字符为子串的开始，再从这个字符的下一个字符开始遍历，作为子串的结尾，组成一个子串，再判断这个子串是否是回文串，时间复杂度<code>O(n^3)</code>，代码没写，因为写出来肯定超时……这种题肯定不是让你用暴力的，所以考虑其他办法。</p>
-<h3 id="2-_DP">2. DP</h3><p>DP拿空间来换时间，对于我这种渣来说，用DP其实就是考验运气的时候到了，很幸运，这次撞狗shi上了，让我给想出来了，哈哈哈哈哈<br>开个二维<code>bool</code>数组<code>dp</code>，<code>dp[i][j]</code>表示从i到j的子串是否是回文串，是则为<code>true</code>，否为<code>false</code>，初始的时候对于<code>i&gt;j</code>的子串因为其不存在，都初始化为<code>true</code>；<code>i=j</code>因为一个字符也是回文串，所以也初始为<code>true</code>；其他则初始为<code>false</code>，不初始化也可以。<br>接下来是状态转移，对于<code>dp[i][j]</code>，其状态应该是由<code>dp[i+1][j-1]</code>转移过来的，即从<code>i+1</code>到<code>j-1</code>的子串<code>sss</code>，若<code>sss</code>不是回文串，那么从<code>i</code>到<code>j</code>的子串也不是回文串；若<code>sss</code>是回文串，还要看字符<code>i</code>和字符<code>j</code>是否相同，相同才是，否则不是。<br>另外，因为<code>dp[i][j]</code>由<code>dp[i+1][j-1]</code>转移过来，即<code>i，j</code>元素的左下方要先确定，所以状态转移应该先列后行。<br>这样DP一下，时间复杂度降到了<code>O(n^2)</code>，不过空间复杂度也升到了<code>O(n^2)</code>，不过无所谓啦，谁让空间便宜呢╮(╯▽╰)╭。。。<br>下面贴代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s == <span class="string">""</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span>(s.length() == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        <span class="keyword">int</span> r = <span class="number">0</span>, l = <span class="number">0</span>, maxlen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">bool</span> dp[s.length()][s.length()];            <span class="comment">// dp[i][j]代表从i到j是否是回文串，</span></span><br><span class="line">                                                    <span class="comment">// 由s[i]是否与s[j]相同且dp[i+1][j-1]决定</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.length(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i &gt;= j)</span><br><span class="line">                    dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    dp[i][j] = <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; s.length(); j++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(s[i] != s[j])&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = dp[i+<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span>(dp[i][j] &amp;&amp; j-i+<span class="number">1</span> &gt; maxlen)&#123;</span><br><span class="line">                        maxlen = j-i+<span class="number">1</span>;</span><br><span class="line">                        r = i;</span><br><span class="line">                        l = j;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substr(r,maxlen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-_KMP">3. KMP</h3><p>这种方法的思路是这样的：原始串为<code>s</code>，把原始串reverse一下得到<code>s1</code>，那么回文子串reverse后其实是没有变化的，然后求<code>s</code>和<code>s1</code>的最长公共子串，得到的就是最长回文子串了。<br>不过这种方法要注意一个问题，比如字符串<code>&quot;abcdxydcba&quot;</code>其实并没有最长回文子串，但是<code>s1</code>和<code>s</code>却有最长公共子串，会得到错误的结果，对于这种情况，只需要判断最长公共子串在<code>s</code>和<code>s1</code>中的下标是否匹配就好了。<br>这种方法时间复杂度就是求最长公共子串的复杂度了，关于求最长公共子串，有DP的方法，也有KMP的方法，以后会再写个专题。<br>这次并没有写代码…</p>
-<h3 id="4-_A_simpler_approach(_O(n^2)时间和O(1)空间_)">4. A simpler approach( O(n^2)时间和O(1)空间 )</h3><p>上面说的空间不值钱，但该省的时候还是得省啊。。所以有大牛就想出了更优化的方法。<br>这种方法从头到尾遍历一遍字符串<code>s</code>，对于<code>s</code>中的每一个字符以及每两个字符之间的空档，以其为中心，然后对比左右两边离中心相同距离的字符是否相等，从而就能求出最长回文子串。<br>这样有<code>2n+1</code>个中心，每个中心最多进行<code>n/2</code>次比较，所以时间复杂度还是<code>O(n^2)</code>,空间复杂度降到了<code>O(1)</code>，真是神奇的方法，不仅省空间还简单易懂，感觉也不难想出来的样子，但就是没想到，智商捉急啊，哎。。。<br>这个代码也没写，因为知道思路了要写出来就很简单了，另外也因为这个方法还有它的威力加强版→_→</p>
-<h3 id="5-_Manacher’s_Algorithm_(An_O(N)_Solution)">5. Manacher’s Algorithm (An O(N) Solution)</h3><p>这个方法主要是利用回文串的对称性质来减少一些不必要的计算。<br>以字符串<code>s = &quot;abaaba&quot;</code>为例，首先在每个字符的中间和<code>s</code>的两边都加上一个s中没有的字符，就拿原文的<code>#</code>好了，得到字符串<code>T = &quot;#a#b#a#a#b#a#&quot;</code>，这样处理之后，不管是偶数长度还是奇数长度的回文串，都不用考虑其差异了，用原文的话说就是——<strong>graciously</strong>。然后用上面的方法4，以<code>T</code>中的每个字符为中心，向两边扩散寻找最长的回文串，可以得到下面的结果：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">T =</span> <span class="comment"># a # b # a # a # b # a #</span></span><br><span class="line"><span class="variable">P =</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">3</span> <span class="number">0</span> <span class="number">1</span> <span class="number">6</span> <span class="number">1</span> <span class="number">0</span> <span class="number">3</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+        <h4 id="Longest-Palindromic-Substring"><a href="#Longest-Palindromic-Substring" class="headerlink" title="Longest Palindromic Substring"></a><a href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank" rel="external">Longest Palindromic Substring</a></h4><p>LeetCode第5题，五种解法，算是字符串处理的一个小专题<br>主要参考了以下两篇文章，都是leetcode OJ的article：<br><a href="http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-i.html" target="_blank" rel="external">Longest Palindromic Substring Part I</a><br><a href="http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-ii.html" target="_blank" rel="external">Longest Palindromic Substring Part II</a><br><a id="more"></a></p>
+<h4 id="1-暴力-Brute-force"><a href="#1-暴力-Brute-force" class="headerlink" title="1. 暴力(Brute force)"></a>1. 暴力(Brute force)</h4><p>首先就是谁都能想到的暴力法了，从头到尾遍历字符串，每次以一个字符为子串的开始，再从这个字符的下一个字符开始遍历，作为子串的结尾，组成一个子串，再判断这个子串是否是回文串，时间复杂度<code>O(n^3)</code>，代码没写，因为写出来肯定超时……这种题肯定不是让你用暴力的，所以考虑其他办法。</p>
+<h4 id="2-DP"><a href="#2-DP" class="headerlink" title="2. DP"></a>2. DP</h4><p>DP拿空间来换时间，对于我这种渣来说，用DP其实就是考验运气的时候到了，很幸运，这次撞狗shi上了，让我给想出来了，哈哈哈哈哈<br>开个二维<code>bool</code>数组<code>dp</code>，<code>dp[i][j]</code>表示从i到j的子串是否是回文串，是则为<code>true</code>，否为<code>false</code>，初始的时候对于<code>i&gt;j</code>的子串因为其不存在，都初始化为<code>true</code>；<code>i=j</code>因为一个字符也是回文串，所以也初始为<code>true</code>；其他则初始为<code>false</code>，不初始化也可以。<br>接下来是状态转移，对于<code>dp[i][j]</code>，其状态应该是由<code>dp[i+1][j-1]</code>转移过来的，即从<code>i+1</code>到<code>j-1</code>的子串<code>sss</code>，若<code>sss</code>不是回文串，那么从<code>i</code>到<code>j</code>的子串也不是回文串；若<code>sss</code>是回文串，还要看字符<code>i</code>和字符<code>j</code>是否相同，相同才是，否则不是。<br>另外，因为<code>dp[i][j]</code>由<code>dp[i+1][j-1]</code>转移过来，即<code>i，j</code>元素的左下方要先确定，所以状态转移应该先列后行。<br>这样DP一下，时间复杂度降到了<code>O(n^2)</code>，不过空间复杂度也升到了<code>O(n^2)</code>，不过无所谓啦，谁让空间便宜呢╮(╯▽╰)╭。。。<br>下面贴代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s == <span class="string">""</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span>(s.length() == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        <span class="keyword">int</span> r = <span class="number">0</span>, l = <span class="number">0</span>, maxlen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">bool</span> dp[s.length()][s.length()];            <span class="comment">// dp[i][j]代表从i到j是否是回文串，</span></span><br><span class="line">                                                    <span class="comment">// 由s[i]是否与s[j]相同且dp[i+1][j-1]决定</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.length(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i &gt;= j)</span><br><span class="line">                    dp[i][j] = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    dp[i][j] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; s.length(); j++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(s[i] != s[j])&#123;</span><br><span class="line">                    dp[i][j] = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = dp[i+<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span>(dp[i][j] &amp;&amp; j-i+<span class="number">1</span> &gt; maxlen)&#123;</span><br><span class="line">                        maxlen = j-i+<span class="number">1</span>;</span><br><span class="line">                        r = i;</span><br><span class="line">                        l = j;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substr(r,maxlen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-KMP"><a href="#3-KMP" class="headerlink" title="3. KMP"></a>3. KMP</h4><p>这种方法的思路是这样的：原始串为<code>s</code>，把原始串reverse一下得到<code>s1</code>，那么回文子串reverse后其实是没有变化的，然后求<code>s</code>和<code>s1</code>的最长公共子串，得到的就是最长回文子串了。<br>不过这种方法要注意一个问题，比如字符串<code>&quot;abcdxydcba&quot;</code>其实并没有最长回文子串，但是<code>s1</code>和<code>s</code>却有最长公共子串，会得到错误的结果，对于这种情况，只需要判断最长公共子串在<code>s</code>和<code>s1</code>中的下标是否匹配就好了。<br>这种方法时间复杂度就是求最长公共子串的复杂度了，关于求最长公共子串，有DP的方法，也有KMP的方法，以后会再写个专题。<br>这次并没有写代码…</p>
+<h4 id="4-A-simpler-approach-O-n-2-时间和O-1-空间"><a href="#4-A-simpler-approach-O-n-2-时间和O-1-空间" class="headerlink" title="4. A simpler approach( O(n^2)时间和O(1)空间 )"></a>4. A simpler approach( O(n^2)时间和O(1)空间 )</h4><p>上面说的空间不值钱，但该省的时候还是得省啊。。所以有大牛就想出了更优化的方法。<br>这种方法从头到尾遍历一遍字符串<code>s</code>，对于<code>s</code>中的每一个字符以及每两个字符之间的空档，以其为中心，然后对比左右两边离中心相同距离的字符是否相等，从而就能求出最长回文子串。<br>这样有<code>2n+1</code>个中心，每个中心最多进行<code>n/2</code>次比较，所以时间复杂度还是<code>O(n^2)</code>,空间复杂度降到了<code>O(1)</code>，真是神奇的方法，不仅省空间还简单易懂，感觉也不难想出来的样子，但就是没想到，智商捉急啊，哎。。。<br>这个代码也没写，因为知道思路了要写出来就很简单了，另外也因为这个方法还有它的威力加强版→_→</p>
+<h4 id="5-Manacher’s-Algorithm-An-O-N-Solution"><a href="#5-Manacher’s-Algorithm-An-O-N-Solution" class="headerlink" title="5. Manacher’s Algorithm (An O(N) Solution)"></a>5. Manacher’s Algorithm (An O(N) Solution)</h4><p>这个方法主要是利用回文串的对称性质来减少一些不必要的计算。<br>以字符串<code>s = &quot;abaaba&quot;</code>为例，首先在每个字符的中间和<code>s</code>的两边都加上一个s中没有的字符，就拿原文的<code>#</code>好了，得到字符串<code>T = &quot;#a#b#a#a#b#a#&quot;</code>，这样处理之后，不管是偶数长度还是奇数长度的回文串，都不用考虑其差异了，用原文的话说就是——<strong>graciously</strong>。然后用上面的方法4，以<code>T</code>中的每个字符为中心，向两边扩散寻找最长的回文串，可以得到下面的结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T = # a # b # a # a # b # a #&#10;P = 0 1 0 3 0 1 6 1 0 3 0 1 0</span><br></pre></td></tr></table></figure></p>
 <p>每个字符下面的数字表示它左右两边最多有几个连续相同的字符，根据<code>P</code>，可以直接找出最长回文串长度为<code>6</code>，以对应的<code>#</code>为中心。<br>观察上面得到的<code>P</code>，可以发现它其实也是以<code>6</code>为中心对称的，这就是我们要用到的回文串的性质了，即在确定了<code>P</code>的中心左边的元素之后，中心右边的元素也可以确定。<br>当然这个性质也是有条件限制的，即只对独立的回文串有效，比如<code>&quot;aba&quot;  &quot;abccba&quot;  &quot;aaaa&quot;</code> 这种的，对于不独立的回文子串，就不一定有效了，但我们可以通过这个性质来减少一些计算。<br>考虑不满足上面条件的一个字符串<code>s = &quot;babcbabcbaccba&quot;</code></p>
 <p><img src="http://7xi72q.com1.z0.glb.clouddn.com/blogpalindrome_table10.png" alt=""></p>
 <p>假设我们已经遍历到了<code>i = 13</code>的位置，<code>C</code>是中心，<code>L、R</code>是以<code>C</code>为中心的最长回文子串的边界，现在要确定<code>P[13]</code>的值，那么根据上面的性质，可以马上得到<code>P[13] = P[9] = 1</code>，同理有<code>P[14] = P[8] = 0</code>，如下图</p>
@@ -187,403 +125,244 @@
 
       
     </div>
-
-    <div class="post-footer">
+    <footer class="article-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Algorithms/"> #Algorithms </a>
-          
-            <a href="/tags/LeetCode/"> #LeetCode </a>
-          
-            <a href="/tags/string-problems/"> #string problems </a>
-          
-        </div>
+        <a data-url="http://ronixy.com/2015/03/24/[LeetCode]-Longest-Palindromic-Substring/" data-id="ciktmiy9j000ttkhl5omw66fg" class="article-share-link">Share</a>
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/">[LeetCode] Container With Most Water/Largest Rectangle in Histogram</a>
-            
-          </div>
-
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/03/23/[LeetCode]-Reverse-Integer-String-to-Integer-(atoi)/">[LeetCode] Reverse Integer/String to Integer (atoi)</a>
-            
-          </div>
-        </div>
+        <a href="http://ronixy.com/2015/03/24/[LeetCode]-Longest-Palindromic-Substring/#ds-thread" class="article-comment-link">Comments</a>
       
 
       
-      
-    </div>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithms/">Algorithms</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/string-problems/">string problems</a></li></ul>
+
+    </footer>
   </div>
-
-
-
+  
     
-      <div class="comments" id="comments">
+<nav id="article-nav">
+  
+    <a href="/2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
-          <div class="ds-thread" data-thread-key="2015/03/24/[LeetCode]-Longest-Palindromic-Substring/"
-               data-title="[LeetCode] Longest Palindromic Substring" data-url="http://ronixy.com/2015/03/24/[LeetCode]-Longest-Palindromic-Substring/">
-          </div>
+          [LeetCode] Container With Most Water/Largest Rectangle in Histogram
         
       </div>
+    </a>
+  
+  
+    <a href="/2015/03/23/[LeetCode]-Reverse-Integer-String-to-Integer-(atoi)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[LeetCode] Reverse Integer/String to Integer (atoi)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/03/24/[LeetCode]-Longest-Palindromic-Substring/" data-title="[LeetCode] Longest Palindromic Substring" data-url="http://ronixy.com/2015/03/24/[LeetCode]-Longest-Palindromic-Substring/"></div>
+  </section>
+
+
+</section>
+      
+      <aside id="sidebar">
+  
     
-  </div>
-
-
-        </div>
-
-        
-      </div>
-
-
-      
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithms/">Algorithms</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LeetCode/">LeetCode</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
-  <div id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithms/">Algorithms</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMP算法/">KMP算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string-problems/">string problems</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/东西冲/">东西冲</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学问题/">数学问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table Of Contents
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/05/25/LeetCode-Search-for-a-Range/">[LeetCode] Search for a Range</a>
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+        
+          <li>
+            <a href="/2015/04/30/LeetCode-Next-Permutation/">[LeetCode] Next Permutation</a>
           </li>
-        </ul>
-      
-
-      <div class="site-overview">
-        <div class="site-author motion-element">
-          <img class="site-author-image" src="http://7xi72q.com1.z0.glb.clouddn.com/blog11669893921fc047a5l_2345.jpg" alt="ronixy" />
-          <p class="site-author-name">ronixy</p>
-        </div>
-        <p class="site-description motion-element">Ronixy's blog</p>
-        <div class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">18</span>
-              <span class="site-state-item-name">posts</span>
-            </a>
-          </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">categories</span>
-              </a>
-          </div>
-
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">tags</span>
-              </a>
-          </div>
-
-        </div>
-
         
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-              <a href="https://github.com/ronixy" target="_blank">GitHub</a>
-            </span>
-            
-              <span class="links-of-author-item">
-              <a href="http://weibo.com/ronixy" target="_blank">Weibo</a>
-            </span>
-            
-          
-        </div>
-
+          <li>
+            <a href="/2015/04/20/LeetCode-Divide-Two-Integers/">[LeetCode] Divide Two Integers</a>
+          </li>
         
+          <li>
+            <a href="/2015/04/20/LeetCode-Remove-Duplicates-from-Sorted-Array-Remove-Element/">[LeetCode] Remove Duplicates from Sorted Array/Remove Element</a>
+          </li>
         
-
-      </div>
-
-      
-        <div class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
-          <div class="post-toc">
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Longest_Palindromic_Substring"><span class="nav-number">1.</span> <span class="nav-text">Longest Palindromic Substring</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-_暴力(Brute_force)"><span class="nav-number"></span> <span class="nav-text">1. 暴力(Brute force)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-_DP"><span class="nav-number"></span> <span class="nav-text">2. DP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-_KMP"><span class="nav-number"></span> <span class="nav-text">3. KMP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-_A_simpler_approach(_O(n^2)时间和O(1)空间_)"><span class="nav-number"></span> <span class="nav-text">4. A simpler approach( O(n^2)时间和O(1)空间 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-_Manacher’s_Algorithm_(An_O(N)_Solution)"><span class="nav-number"></span> <span class="nav-text">5. Manacher’s Algorithm (An O(N) Solution)</span></a></div>
-            
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
-        </div>
-      
-
+          <li>
+            <a href="/2015/04/19/LeetCode-Implement-strStr-KMP算法/">[LeetCode] Implement strStr()---KMP算法</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
 
-
-    </div>
-
-    <div id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">
   
-  &copy; &nbsp; 
-  2015
-  <span class="with-love">
-    <i class="icon-heart"></i>
-  </span>
-  <span class="author">ronixy</span>
-</div>
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
-
-
-
-      </div>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://chenguolong.com/" target="_blank">Rancho&#39;s Blog</a>
+          </li>
+        
+      </ul>
     </div>
-
-    <div class="back-to-top"></div>
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
   
+</aside>
+      
+    </div>
+    <footer id="footer">
   
-
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 ronixy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
   
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js"></script>
+    <a href="/" class="mobile-nav-link">Home</a>
   
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js" id="motion.global"></script>
-
-
-
-
+    <a href="/archives" class="mobile-nav-link">Archives</a>
   
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="totop"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ronixy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
   
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js" id="bootstrap.scrollspy.custom"></script>
+        });
+</script>
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
 
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var $sidebarInner = $('.sidebar-inner');
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.didShow', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-          var self = this;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      $(indicator).velocity('stop').velocity({
-        opacity: action === 'show' ? 0.4 : 0
-      }, { duration: 100 });
-    }
-
-  });
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
-  <script type="text/javascript" id="sidebar.nav">
-    $(document).ready(function () {
-      var html = $('html');
+<script src="/js/script.js" type="text/javascript"></script>
 
-      $('.sidebar-nav li').on('click', function () {
-        var item = $(this);
-        var activeTabClassName = 'sidebar-nav-active';
-        var activePanelClassName = 'sidebar-panel-active';
-        if (item.hasClass(activeTabClassName)) {
-          return;
-        }
+</div>
+<!-- mathjax config similar to math.stackexchange -->
 
-        var currentTarget = $('.' + activePanelClassName);
-        var target = $('.' + item.data('target'));
-
-        currentTarget.velocity('transition.slideUpOut', 200, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', 200)
-            .addClass(activePanelClassName);
-        });
-
-        item.siblings().removeClass(activeTabClassName);
-        item.addClass(activeTabClassName);
-      });
-
-      $('.post-toc a').on('click', function (e) {
-        e.preventDefault();
-        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        });
-      });
-
-      // Expand sidebar on post detail page by default, when post has a toc.
-      var $tocContent = $('.post-toc-content');
-      if (isDesktop() && CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
-        }
-      }
-    });
-  </script>
-
-
-
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-    });
-  </script>
-
-  
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
     }
   });
 </script>
 
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
 </script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
 
-
-  
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"ronixy"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-
-
-  
-  
-
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </body>
 </html>

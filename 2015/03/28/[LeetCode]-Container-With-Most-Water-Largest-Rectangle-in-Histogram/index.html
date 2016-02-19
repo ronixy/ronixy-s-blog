@@ -1,584 +1,370 @@
-<!doctype html>
-<html class="theme-next use-motion theme-next-mist">
+
+<!DOCTYPE html>
+<html>
 <head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="8wzyN59ggVJs4qdS9_hwgVtKJImj8bVQyDAfY5sfjO0" />
+  
+  <title>[LeetCode] Container With Most Water/Largest Rectangle in Histogram | Ronixy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="两道求最大面积的题
+Container With Most Water这个题限制围成的container不能倾斜，就简单了很多，注意计算面积时高要选高度小的那个。这题思路跟Two Sum有点类似，不过是下标不能改变了，复杂度还是O(n)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[LeetCode] Container With Most Water/Largest Rectangle in Histogram">
+<meta property="og:url" content="http://ronixy.com/2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/index.html">
+<meta property="og:site_name" content="Ronixy">
+<meta property="og:description" content="两道求最大面积的题
+Container With Most Water这个题限制围成的container不能倾斜，就简单了很多，注意计算面积时高要选高度小的那个。这题思路跟Two Sum有点类似，不过是下标不能改变了，复杂度还是O(n)。">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/20150329231119.jpg">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/20150329231204.jpg">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/20150329231353.jpg">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/20150329231536.jpg">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/20150329231637.jpg">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/20150329233215.jpg">
+<meta property="og:image" content="http://7xi72q.com1.z0.glb.clouddn.com/20150329231836.jpg">
+<meta property="og:updated_time" content="2016-02-19T11:03:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[LeetCode] Container With Most Water/Largest Rectangle in Histogram">
+<meta name="twitter:description" content="两道求最大面积的题
+Container With Most Water这个题限制围成的container不能倾斜，就简单了很多，注意计算面积时高要选高度小的那个。这题思路跟Two Sum有点类似，不过是下标不能改变了，复杂度还是O(n)。">
+  
+    <link rel="alternative" href="/atom.xml" title="Ronixy" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-    <meta name="description" content="Ronixy's blog" />
-
-
-
-  <meta name="keywords" content="Algorithms,LeetCode,数学问题," />
-
-
-
-
-
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var CONFIG = {
-    scheme: 'Mist',
-    analytics: {
-      baidu: '',
-      google: ''
-    },
-    sidebar: 'post'
-  };
-</script>
-
-
-
-
-  <title> [LeetCode] Container With Most Water/Largest Rectangle in Histogram // Ronixy </title>
+  
+  <link href="http://7xi72q.com1.z0.glb.clouddn.com/blogzoo (1).ico" rel="shortcut icon" type="image/x-icon" />
+  
 </head>
-
 <body>
-<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
-  <div class="container one-column page-post-detail">
-    <div class="headband"></div>
-
-    <div id="header" class="header">
-      <div class="header-inner">
-        <h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand">
-      <span class="logo">
-        <i class="icon-logo"></i>
-      </span>
-      <span class="site-title">Ronixy</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
-
-
-  <ul id="menu" class="menu">
-     
-    
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Ronixy</a>
+      </h1>
       
-      <li class="menu-item menu-item-home">
-        <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
-          Home
-        </a>
-      </li>
-    
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">但行好事，莫问前程。</a>
+        </h2>
       
-      <li class="menu-item menu-item-categories">
-        <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
-          Categories
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-archives">
-        <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
-          Archives
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-tags">
-        <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
-          Tags
-        </a>
-      </li>
-    
-  </ul>
-
-
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="ronixy.com">
+        </form>
       </div>
     </div>
-
-    <div id="main" class="main">
-      <div class="main-inner">
-        <div id="content" class="content">
-          
-
-  <div id="posts" class="posts-expand">
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/" class="article-date">
+  <time datetime="2015-03-28T12:35:30.000Z" itemprop="datePublished">2015-03-28</time>
+</a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
+  </div>
 
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              [LeetCode] Container With Most Water/Largest Rectangle in Histogram
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on 2015-03-28
-        </span>
-
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
         
-          <span class="post-category">
-            &nbsp; | &nbsp; In
-            
-              <a href="/categories/LeetCode/">LeetCode</a>
+  
+    <h1 class="article-title" itemprop="name">
+      [LeetCode] Container With Most Water/Largest Rectangle in Histogram
+    </h1>
+  
 
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
       
 
       
         <p>两道求最大面积的题</p>
-<h4 id="Container_With_Most_Water"><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" rel="external">Container With Most Water</a></h4><p>这个题限制围成的container不能倾斜，就简单了很多，注意计算面积时高要选高度小的那个。这题思路跟Two Sum有点类似，不过是下标不能改变了，复杂度还是<code>O(n)</code>。<br><a id="more"></a></p>
+<h4 id="Container-With-Most-Water"><a href="#Container-With-Most-Water" class="headerlink" title="Container With Most Water"></a><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" rel="external">Container With Most Water</a></h4><p>这个题限制围成的container不能倾斜，就简单了很多，注意计算面积时高要选高度小的那个。这题思路跟Two Sum有点类似，不过是下标不能改变了，复杂度还是<code>O(n)</code>。<br><a id="more"></a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span> height[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> f = <span class="number">0</span>, t = n-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> res = (height[f] &lt; height[t] ? height[f] : height[t]) * (t-f);</span><br><span class="line">    <span class="keyword">while</span>(f &lt; t)&#123;</span><br><span class="line">        <span class="keyword">if</span>(height[f] &lt; height[t])&#123;</span><br><span class="line">            <span class="keyword">if</span>(height[f+<span class="number">1</span>] &lt; height[f])&#123;</span><br><span class="line">                f++;        <span class="comment">//如果下一个高度比上一个小，则可以确定面积肯定也变小了，</span></span><br><span class="line">                            <span class="comment">//直接继续往后遍历，省去了不必要的计算</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                f++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(height[t-<span class="number">1</span>] &lt; height[t])&#123;</span><br><span class="line">                t--;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                t--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(f &lt; t)&#123;</span><br><span class="line">            <span class="keyword">int</span> v = (height[f] &lt; height[t] ? height[f] : height[t]) * (t-f);</span><br><span class="line">            <span class="keyword">if</span>(v &gt; res)</span><br><span class="line">                res = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Largest_Rectangle_in_Histogram"><a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="external">Largest Rectangle in Histogram</a></h4><p>求直方图的柱子能围成的最大面积，首先就是暴力了，时间复杂度<code>O(n^2)</code>，试了下，超时了。。<br>然后就想不出来了，只好google，找到了<code>O(n)</code>的方法 <a href="http://fisherlei.blogspot.com/2012/12/leetcode-largest-rectangle-in-histogram.html" target="_blank" rel="external">Largest Rectangle in Histogram 解题报告</a>，话说这TM给我一周我也想不出来啊。。。看了半天，终于懂了，下面我试着解释一下。。<br>这个思路主要是设置了一个栈<code>s</code>，然后</p>
+<h4 id="Largest-Rectangle-in-Histogram"><a href="#Largest-Rectangle-in-Histogram" class="headerlink" title="Largest Rectangle in Histogram"></a><a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="external">Largest Rectangle in Histogram</a></h4><p>求直方图的柱子能围成的最大面积，首先就是暴力了，时间复杂度<code>O(n^2)</code>，试了下，超时了。。<br>然后就想不出来了，只好google，找到了<code>O(n)</code>的方法 <a href="http://fisherlei.blogspot.com/2012/12/leetcode-largest-rectangle-in-histogram.html" target="_blank" rel="external">Largest Rectangle in Histogram 解题报告</a>，话说这TM给我一周我也想不出来啊。。。看了半天，终于懂了，下面我试着解释一下。。<br>这个思路主要是设置了一个栈<code>s</code>，然后</p>
 <ol>
 <li>从头开始遍历直方图，到一个柱子时，如果它比栈顶下标<code>s.top()</code>对应的柱子高，则将其下标入栈(注意是下标)，直到找到一个柱子<code>i</code>比栈顶下标<code>s.top()</code>对应的柱子低为止；</li>
 <li>接着，开始从栈顶弹出下标<code>p</code>，计算对应的最大面积，这时候要进行判断栈是否是空的，如果取出这个元素后栈变为了空栈，说明从0到i的最小高度就是<code>height[p]了</code>，不然它前面也不会没有东西，而<code>height[i+1]</code>又小于<code>height[p]</code>，此时，计算面积就是<code>height[p]×i</code>；如果栈不空，则<code>p</code>之前比它低的柱子下标是<code>s.top()</code>，<code>p</code>之后比它低的柱子下标是<code>i+1</code>，这时候计算面积就是<code>height[p]×(i-s.top()-1)</code>，注意这里计算面积的宽度是减去<code>s.top()</code>，是因为这时候的最大面积应该延伸到<code>s.top()</code>这个下标那里，因为从<code>s.top()</code>到<code>p</code>之间的柱子都比下标为p的柱子高，这个道理可以用简单的<code>{2,1,2}</code>模拟一下就懂了，另外因为<code>s.top()</code>比<code>p</code>对应的柱子低，所以不能算上它，所以宽度要再减一；</li>
 <li>那么这种从栈中弹出元素的过程什么时候停止呢？当<code>height[s.top()]</code>比<code>height[i]</code>低时，就停下来，因为这时候可以将i压栈了，这样就保证了如果用<code>height[s.top()]</code>计算面积时，不会遗漏<code>i</code>后面的部分；</li>
-<li>回到1，每次压栈时判断。这样一直循环到最后，另外要注意往<code>height</code>后添加一个零高度的元素，这样保证所有元素都能参与计算。<br>下面用示意图模拟下这个算法用在直方图<code>{2,1,5,6,2,3}</code>的过程:<br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231119.jpg" alt=""><br>首先把<code>2</code>压入栈，扫描到<code>1</code>的时候，<code>2</code>出栈，计算面积得到<code>2</code>，如下图<br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231204.jpg" alt=""><br>然后继续向后扫描，<code>1、5、6</code>依次入栈，到<code>2</code>停止，开始计算面积，首先弹出<code>6</code>，得到最大面积是<code>6=height[3]×(4-2-1)</code>，<code>i</code>是<code>4</code>，<code>s.top()</code>是<code>2</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231353.jpg" alt=""><br>然后弹出<code>5</code>，计算最大面积是<code>10=height[2]×(4-1-1)</code>，<code>i</code>是<code>4</code>，<code>s.top()</code>是<code>1</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231536.jpg" alt=""><br>然后因为<code>height[s.top()]=1</code>比<code>height[i]=2</code>小，将<code>i</code>压栈，后面的<code>3</code>对应的下标也压栈，然后扫描到最后的<code>0</code>，开始弹出<code>s.top()</code>计算面积，此时应该弹出<code>3</code>的下标，计算面积是<code>3×(6-4-1)</code>，<code>i</code>是<code>6</code>，<code>s.top()</code>是<code>4</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231637.jpg" alt=""><br>接着弹出<code>2</code>对应的下标，计算面积得到<code>height[4]×(6-1-1)=8</code>，<code>i</code>是6，<code>s.top()</code>是<code>1</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329233215.jpg" alt=""><br>最后弹出<code>1</code>，此时栈为空，面积计算是<code>height[1]×6=6</code>，即乘<code>i=6</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231836.jpg" alt=""><br>这时已计算出所有可能的最大面积了，取出其中最大的即可。<br>代码很简单，也是参考大神的，再次膜拜。。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        height.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="stl_container"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;</span> s;</span><br><span class="line">        s.push(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; height.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.empty() || height[i] &gt; height[s.top()])&#123;</span><br><span class="line">                s.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> p = s.top();</span><br><span class="line">                s.pop();</span><br><span class="line">                res = max(res, height[p]*(s.empty() ? i : (i-s.top()-<span class="number">1</span>)));</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>回到1，每次压栈时判断。这样一直循环到最后，另外要注意往<code>height</code>后添加一个零高度的元素，这样保证所有元素都能参与计算。<br>下面用示意图模拟下这个算法用在直方图<code>{2,1,5,6,2,3}</code>的过程:<br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231119.jpg" alt=""><br>首先把<code>2</code>压入栈，扫描到<code>1</code>的时候，<code>2</code>出栈，计算面积得到<code>2</code>，如下图<br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231204.jpg" alt=""><br>然后继续向后扫描，<code>1、5、6</code>依次入栈，到<code>2</code>停止，开始计算面积，首先弹出<code>6</code>，得到最大面积是<code>6=height[3]×(4-2-1)</code>，<code>i</code>是<code>4</code>，<code>s.top()</code>是<code>2</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231353.jpg" alt=""><br>然后弹出<code>5</code>，计算最大面积是<code>10=height[2]×(4-1-1)</code>，<code>i</code>是<code>4</code>，<code>s.top()</code>是<code>1</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231536.jpg" alt=""><br>然后因为<code>height[s.top()]=1</code>比<code>height[i]=2</code>小，将<code>i</code>压栈，后面的<code>3</code>对应的下标也压栈，然后扫描到最后的<code>0</code>，开始弹出<code>s.top()</code>计算面积，此时应该弹出<code>3</code>的下标，计算面积是<code>3×(6-4-1)</code>，<code>i</code>是<code>6</code>，<code>s.top()</code>是<code>4</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231637.jpg" alt=""><br>接着弹出<code>2</code>对应的下标，计算面积得到<code>height[4]×(6-1-1)=8</code>，<code>i</code>是6，<code>s.top()</code>是<code>1</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329233215.jpg" alt=""><br>最后弹出<code>1</code>，此时栈为空，面积计算是<code>height[1]×6=6</code>，即乘<code>i=6</code><br><img src="http://7xi72q.com1.z0.glb.clouddn.com/20150329231836.jpg" alt=""><br>这时已计算出所有可能的最大面积了，取出其中最大的即可。<br>代码很简单，也是参考大神的，再次膜拜。。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        height.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">        s.push(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; height.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.empty() || height[i] &gt; height[s.top()])&#123;</span><br><span class="line">                s.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> p = s.top();</span><br><span class="line">                s.pop();</span><br><span class="line">                res = max(res, height[p]*(s.empty() ? i : (i-s.top()-<span class="number">1</span>)));</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
     </div>
-
-    <div class="post-footer">
+    <footer class="article-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Algorithms/"> #Algorithms </a>
-          
-            <a href="/tags/LeetCode/"> #LeetCode </a>
-          
-            <a href="/tags/数学问题/"> #数学问题 </a>
-          
-        </div>
+        <a data-url="http://ronixy.com/2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/" data-id="ciktmiya5001atkhlywjz9o6j" class="article-share-link">Share</a>
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/03/28/[LeetCode]-Integer-to-Roman-Roman-to-Integer/">[LeetCode] Integer to Roman/Roman to Integer</a>
-            
-          </div>
-
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/03/24/[LeetCode]-Longest-Palindromic-Substring/">[LeetCode] Longest Palindromic Substring</a>
-            
-          </div>
-        </div>
+        <a href="http://ronixy.com/2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/#ds-thread" class="article-comment-link">Comments</a>
       
 
       
-      
-    </div>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithms/">Algorithms</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数学问题/">数学问题</a></li></ul>
+
+    </footer>
   </div>
-
-
-
+  
     
-      <div class="comments" id="comments">
+<nav id="article-nav">
+  
+    <a href="/2015/03/28/[LeetCode]-Integer-to-Roman-Roman-to-Integer/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
-          <div class="ds-thread" data-thread-key="2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/"
-               data-title="[LeetCode] Container With Most Water/Largest Rectangle in Histogram" data-url="http://ronixy.com/2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/">
-          </div>
+          [LeetCode] Integer to Roman/Roman to Integer
         
       </div>
+    </a>
+  
+  
+    <a href="/2015/03/24/[LeetCode]-Longest-Palindromic-Substring/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[LeetCode] Longest Palindromic Substring</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/" data-title="[LeetCode] Container With Most Water/Largest Rectangle in Histogram" data-url="http://ronixy.com/2015/03/28/[LeetCode]-Container-With-Most-Water-Largest-Rectangle-in-Histogram/"></div>
+  </section>
+
+
+</section>
+      
+      <aside id="sidebar">
+  
     
-  </div>
-
-
-        </div>
-
-        
-      </div>
-
-
-      
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithms/">Algorithms</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LeetCode/">LeetCode</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
-  <div id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithms/">Algorithms</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMP算法/">KMP算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string-problems/">string problems</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/东西冲/">东西冲</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学问题/">数学问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table Of Contents
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/05/25/LeetCode-Search-for-a-Range/">[LeetCode] Search for a Range</a>
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+        
+          <li>
+            <a href="/2015/04/30/LeetCode-Next-Permutation/">[LeetCode] Next Permutation</a>
           </li>
-        </ul>
-      
-
-      <div class="site-overview">
-        <div class="site-author motion-element">
-          <img class="site-author-image" src="http://7xi72q.com1.z0.glb.clouddn.com/blog11669893921fc047a5l_2345.jpg" alt="ronixy" />
-          <p class="site-author-name">ronixy</p>
-        </div>
-        <p class="site-description motion-element">Ronixy's blog</p>
-        <div class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">18</span>
-              <span class="site-state-item-name">posts</span>
-            </a>
-          </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">categories</span>
-              </a>
-          </div>
-
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">tags</span>
-              </a>
-          </div>
-
-        </div>
-
         
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-              <a href="https://github.com/ronixy" target="_blank">GitHub</a>
-            </span>
-            
-              <span class="links-of-author-item">
-              <a href="http://weibo.com/ronixy" target="_blank">Weibo</a>
-            </span>
-            
-          
-        </div>
-
+          <li>
+            <a href="/2015/04/20/LeetCode-Divide-Two-Integers/">[LeetCode] Divide Two Integers</a>
+          </li>
         
+          <li>
+            <a href="/2015/04/20/LeetCode-Remove-Duplicates-from-Sorted-Array-Remove-Element/">[LeetCode] Remove Duplicates from Sorted Array/Remove Element</a>
+          </li>
         
-
-      </div>
-
-      
-        <div class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
-          <div class="post-toc">
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Container_With_Most_Water"><span class="nav-number">1.</span> <span class="nav-text">Container With Most Water</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Largest_Rectangle_in_Histogram"><span class="nav-number">2.</span> <span class="nav-text">Largest Rectangle in Histogram</span></a></li></ol></div>
-            
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
-        </div>
-      
-
+          <li>
+            <a href="/2015/04/19/LeetCode-Implement-strStr-KMP算法/">[LeetCode] Implement strStr()---KMP算法</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
 
-
-    </div>
-
-    <div id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">
   
-  &copy; &nbsp; 
-  2015
-  <span class="with-love">
-    <i class="icon-heart"></i>
-  </span>
-  <span class="author">ronixy</span>
-</div>
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
-
-
-
-      </div>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://chenguolong.com/" target="_blank">Rancho&#39;s Blog</a>
+          </li>
+        
+      </ul>
     </div>
-
-    <div class="back-to-top"></div>
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
   
+</aside>
+      
+    </div>
+    <footer id="footer">
   
-
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 ronixy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
   
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js"></script>
+    <a href="/" class="mobile-nav-link">Home</a>
   
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js" id="motion.global"></script>
-
-
-
-
+    <a href="/archives" class="mobile-nav-link">Archives</a>
   
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="totop"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ronixy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
   
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js" id="bootstrap.scrollspy.custom"></script>
+        });
+</script>
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
 
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var $sidebarInner = $('.sidebar-inner');
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.didShow', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-          var self = this;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      $(indicator).velocity('stop').velocity({
-        opacity: action === 'show' ? 0.4 : 0
-      }, { duration: 100 });
-    }
-
-  });
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
-  <script type="text/javascript" id="sidebar.nav">
-    $(document).ready(function () {
-      var html = $('html');
+<script src="/js/script.js" type="text/javascript"></script>
 
-      $('.sidebar-nav li').on('click', function () {
-        var item = $(this);
-        var activeTabClassName = 'sidebar-nav-active';
-        var activePanelClassName = 'sidebar-panel-active';
-        if (item.hasClass(activeTabClassName)) {
-          return;
-        }
+</div>
+<!-- mathjax config similar to math.stackexchange -->
 
-        var currentTarget = $('.' + activePanelClassName);
-        var target = $('.' + item.data('target'));
-
-        currentTarget.velocity('transition.slideUpOut', 200, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', 200)
-            .addClass(activePanelClassName);
-        });
-
-        item.siblings().removeClass(activeTabClassName);
-        item.addClass(activeTabClassName);
-      });
-
-      $('.post-toc a').on('click', function (e) {
-        e.preventDefault();
-        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        });
-      });
-
-      // Expand sidebar on post detail page by default, when post has a toc.
-      var $tocContent = $('.post-toc-content');
-      if (isDesktop() && CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
-        }
-      }
-    });
-  </script>
-
-
-
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-    });
-  </script>
-
-  
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
     }
   });
 </script>
 
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
 </script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
 
-
-  
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"ronixy"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-
-
-  
-  
-
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </body>
 </html>
