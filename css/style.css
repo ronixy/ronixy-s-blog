@@ -130,7 +130,7 @@ body {
 }
 .outer {
   zoom: 1;
-  max-width: 1220px;
+  max-width: 1520px;
   margin: 0 auto;
   padding: 0 10px;
 }
@@ -145,8 +145,8 @@ body {
 .inner {
   display: inline;
   float: left;
-  width: 98.33333333333333%;
-  margin: 0 0.833333333333333%;
+  width: 98.66666666666667%;
+  margin: 0 0.666666666666667%;
 }
 .left,
 .alignleft {
@@ -186,8 +186,8 @@ body {
   #main {
     display: inline;
     float: left;
-    width: 73.33333333333333%;
-    margin: 0 0.833333333333333%;
+    width: 78.66666666666666%;
+    margin: 0 0.666666666666667%;
   }
 }
 .article-date,
@@ -1084,7 +1084,7 @@ a.article-title:hover {
 }
 .article-entry pre,
 .article-entry .highlight {
-  background: #272822;
+  background: #333;
 /*margin: 0 article-padding * -1*/
   margin: auto;
   padding: 15px 20px;
@@ -1164,7 +1164,7 @@ a.article-title:hover {
   border-style: solid;
   border-color: #ddd;
   border-width: 1px 0;
-  background: #272822;
+  background: #333;
   padding: 15px 20px 15px 0;
 }
 .article-entry .gist .gist-file {
@@ -1190,7 +1190,7 @@ a.article-title:hover {
   border: none;
 }
 .article-entry .gist .gist-file .gist-meta {
-  background: #272822;
+  background: #333;
   color: #888;
   font: 0.85em "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-shadow: 0 0;
@@ -1305,8 +1305,8 @@ pre .javascript .function {
   #sidebar {
     display: inline;
     float: left;
-    width: 23.333333333333332%;
-    margin: 0 0.833333333333333%;
+    width: 18.666666666666668%;
+    margin: 0 0.666666666666667%;
   }
 }
 .widget-wrap {
